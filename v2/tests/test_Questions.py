@@ -39,21 +39,21 @@ class questionTestCase(unittest.TestCase):
         self.assertIn('How do you create a list in python?', str(resp.data))
 
     def test_confirm_forum_creation(self):
-        """Test user cannot have same buckelist titles"""
+        """Test user cannot post the same questions """
         self.client().post(
             '/question', headers=self.login(), data=self.question)
         resp = self.client().post(
             '/question/', headers=self.login(), data=self.question)
         self.assertEqual(resp.status_code, 403)
-        self.assertIn('Title already taken!', str(resp.data))
+        self.assertIn('That question has been posted!', str(resp.data))
 
     def test_blank_title(self):
-        """Test that title is not blank"""
+        """Test that question is not blank"""
         self.question['title'] = ''
         resp = self.client().post(
             '/question/', headers=self.login(), data=self.question)
         self.assertEqual(resp.status_code, 401)
-        self.assertIn('Blank title. Please write your title', str(resp.data))
+        self.assertIn('Please write your question', str(resp.data))
 
     def test_get_all_questions_when_blank(self):
         """Tests if a question exists"""
@@ -99,7 +99,7 @@ class questionTestCase(unittest.TestCase):
         self.assertEqual(len(json.loads(resp.data.decode())['question']), 1)
 
     def test_question_search_for_non_existent(self):
-        """Test API can search q  for non existing data"""
+        """Test API can search for non existing data"""
         resp = self.client().get(
             '/question?q=question20', headers=self.login(), data=self.question)
         self.assertIn('questions not found', str(resp.data))
@@ -115,7 +115,7 @@ class questionTestCase(unittest.TestCase):
             '/question?limit=1', headers=self.login(), data=self.question)
         self.assertEqual(len(json.loads(resp.data.decode())['question']), 1)
 
-    def test_limit_is_alphanumerhic(self):
+    def test_input_is_alphanumerhic(self):
         """Test API can search content limit with aplhabets"""
         resp = self.client().get(
             '/question?limit=test', headers=self.login(), data=self.question)
