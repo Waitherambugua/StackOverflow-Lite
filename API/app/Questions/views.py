@@ -36,7 +36,7 @@ from . import Questions
                 'id': question.id,
                 'name': question.name,
                 'date_created': question.date_created,
-                'date_modified': bucketlist.date_modified
+                'date_modified': question.date_modified
             })
             response.status_code = 200
             return response
