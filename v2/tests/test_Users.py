@@ -6,6 +6,8 @@ import unittest
 import os
 import json
 from app import db, create_app
+from app.users,model import user
+
 
 
 class UserTestCase(unittest.TestCase):
