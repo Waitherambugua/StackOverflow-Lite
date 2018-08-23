@@ -3,11 +3,13 @@ Test for the user class with authentication
 
 """
 import unittest
-import sh
 import os
 import json
 from app import db, create_app
-from app.users.model import user
+from app.users,model import user
+from api.endpoints import users
+import unittest
+import
 
 
 
@@ -26,17 +28,17 @@ class UserTestCase(unittest.TestCase):
 
     def registration(self):
         """Test API can register a user"""
-        resp = self.client().post('/auth/register/', data=self.user)
+        resp = self.client().post('/auth/signup/', data=self.user)
 
     def login(self):
-        """Logins a user"""
+        """Login a user"""
         self.registration()
         resp = self.client().post('/auth/login/', data=self.user)
         return {'Authorization': json.loads(resp.data.decode())['token']}
 
     def test_user_registration(self):
         """Test API can create a user"""
-        resp = self.client().post('/auth/register/', data=self.user)
+        resp = self.client().post('/signup/', data=self.user)
         self.assertEqual(resp.status_code, 201)
         self.assertIn('Sign Up has been successful', str(resp.data))
 
