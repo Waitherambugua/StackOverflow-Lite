@@ -13,7 +13,7 @@ def Login():
 	
 	error = None
 	if request.method =="POST":
-		if request.form['username'] != 'admin' or request.form["password"] != 'admin':
+		if request.form['username'] != 'flaskuser' or request.form["password"] != 'flaskuser2018':
 			error = "Invalid credentials. Please try again."
 		else:
 			return redirect(url_for("UserAccount"))

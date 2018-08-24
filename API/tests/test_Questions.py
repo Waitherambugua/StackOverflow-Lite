@@ -4,12 +4,16 @@ import Questions.views
 import os
 import json
 
+
+
+
+
 class BaseTestCase(TestCase):
 
     def setUp(self):
 
         """Configure test enviroment."""
-
+    
         os.environ['APP_SETTINGS'] = 'Testing'
         self.app = create_app("Testing")
         self.app_context = self.app.app_context()
