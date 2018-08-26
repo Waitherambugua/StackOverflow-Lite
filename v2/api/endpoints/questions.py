@@ -124,5 +124,5 @@ class updateAnswer(MethodView):
             "text": text
         }
         return jsonify(resp), 200
-        pass
+     
 
