@@ -1,8 +1,12 @@
 """
 Tests for Questions
 """
+import unittest
+import os
+import json
+from api import db, create_app
+from api.endpoints import questions
 
-from api.endpoints import users
 
 class questionTestCase(unittest.TestCase):
     """This class represents the question test case"""
@@ -11,7 +15,7 @@ class questionTestCase(unittest.TestCase):
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client
         self.user = {'email': 'test@test.com', 'password': 'testPass'}
-        self.question = {'question': 'How do you create a list in python'}
+        self.question = {'title': 'Visit America'}
 
         # binds the app to the current context
         with self.app.app_context():
@@ -20,12 +24,12 @@ class questionTestCase(unittest.TestCase):
 
     def registration(self):
         """Test for User registeration"""
-        return self.client().post('/signup/', data=self.user)
+        return self.client().post('/auth/register/', data=self.user)
 
     def login(self):
         """Logins a user"""
         self.registration()
-        resp = self.client().post('/login/', data=self.user)
+        resp = self.client().post('/auth/login/', data=self.user)
         return {'Authorization': json.loads(resp.data.decode())['token']}
 
     def test_create_question(self):
@@ -115,7 +119,7 @@ class questionTestCase(unittest.TestCase):
     def test_input_is_alphanumerhic(self):
         """Test API can search content limit with aplhabets"""
         resp = self.client().get(
-            '/question?test', headers=self.login(), data=self.question)
+            '/question?limit=test', headers=self.login(), data=self.question)
         self.assertIn(
             'Error, pass a number', json.loads(resp.data.decode()).values())
 

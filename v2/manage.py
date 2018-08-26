@@ -3,12 +3,22 @@ import unittest
 
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-from api.endpoints import users
+from flask_restplus import Api
+from flask import Blueprint
+from api.endpoints import user
 from api import create_app, db
-from v2 import blueprint
+
 
 
 app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
+
+blueprint = Blueprint('api', __name__)
+
+api = Api(blueprint,
+          title='FLASK RESTPLUS API: STACKOVERFLOW-LITE',
+          version='2.0',
+          description='An Api for Stackoverflow-Lite'
+          )
 app.register_blueprint(blueprint)
 
 app.app_context().push()

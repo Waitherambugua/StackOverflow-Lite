@@ -2,7 +2,7 @@ import uuid
 import datetime
 
 from v2.endpoints import db
-from v2.api.endpoints.users import User
+from v2.api.endpoints.user import User
 
 
 def save_new_user(data):

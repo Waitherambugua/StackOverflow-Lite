@@ -4,13 +4,13 @@ import unittest
 from flask import current_app
 from flask_testing import TestCase
 
-from api.manage import app
-from api.app.config import basedir
+import manage
+from api.config import basedir
 
 
 class TestDevelopmentConfig(TestCase):
     def create_app(self):
-        app.config.from_object('app.main.config.DevelopmentConfig')
+        app.config.from_object('api.config.DevelopmentConfig')
         return app
 
     def test_app_is_development(self):

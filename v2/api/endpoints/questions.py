@@ -2,7 +2,7 @@ from .database.models import Models
 from flask import jsonify
 
 
-class Questions(MethodView):
+class Questions(Resources):
     """ 
     Questions
     """

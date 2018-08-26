@@ -1,10 +1,25 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
 from .config import config_by_name
+from psycopg2 import connect
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+"""import sys
 
-db = SQLAlchemy()
+
+con = None
+con = connect(dbname='postgres', user='Linda Mbugua', host='localhost', password='p1nkangel')
+
+dbname = "Stackoverflowlite"
+
+con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+cur = con.cursor()
+cur.execute('CREATE DATABASE ' + dbname)
+cur.close()
+con.close()
+
+db = SQLAlchemy()"""
 flask_bcrypt = Bcrypt()
 
 
@@ -15,8 +30,6 @@ def create_app(config_name):
     flask_bcrypt.init_app(app)
 
     return app
-
-
 
 
 
