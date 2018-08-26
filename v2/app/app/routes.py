@@ -8,9 +8,9 @@ from datetime import datetime
 from app.helpers import insert_user, get_user, post_question, get_questions, get_question, edit_question, delete_question
 from app.models import User, Questions, Answer
 
-web = Blueprint("web",__name__)
+app = Blueprint("app",__name__)
 
-@web.route('/api/v2/auth/signup', methods=['POST'])
+@app.route('/api/v2/auth/signup', methods=['POST'])
 def signup_user():
     user = get_user(request.json.get('email'))
     if user is not None:
@@ -25,7 +25,7 @@ def signup_user():
     if user == "./?><{!@#$%^&*(":
         return jsonify({'message': 'User credentials required to register!'})
 
-@web.route('/api/v2/auth/signin', methods=['POST'])
+@app.route('/api/v2/auth/signin', methods=['POST'])
 def signin():
     email = request.json.get("email")
     password = request.json.get("password")
@@ -41,7 +41,7 @@ def signin():
     return make_response('Your account does not exist!, Please Register!'), 401
 
 
-@web.route('/api/v2/questions', methods=['POST'])
+@app.route('/api/v2/questions', methods=['POST'])
 @jwt_required
 def question():
 
@@ -55,7 +55,7 @@ def question():
     question.save()
     return jsonify({'Questions': question.__dict__}), 201
 
-@web.route('/api/v2/questions', methods=['GET'])
+@app.route('/api/v2/questions', methods=['GET'])
 @jwt_required
 def view_all_questions():
     email = get_jwt_identity()
@@ -67,7 +67,7 @@ def view_all_questions():
         return jsonify({'message': 'No questions found'})
     return jsonify({'Questions': questions}), 200
 
-@web.route('/api/v2/questions/<int:id>', methods=['GET'])
+@app.route('/api/v2/questions/<int:id>', methods=['GET'])
 @jwt_required
 def single_question(id):
     email = get_jwt_identity()
@@ -98,7 +98,7 @@ def modify_question(id):
 
     return jsonify({'Questions': edit}), 200
 
-@web.route('/api/v2/questions/<int:id>', methods=['DELETE'])
+@app.route('/api/v2/questions/<int:id>', methods=['DELETE'])
 @jwt_required
 def remove_question(id):
     email = get_jwt_identity()
@@ -111,7 +111,7 @@ def remove_question(id):
     delete_question(id)
     return jsonify({'message': 'Question has been deleted!'}), 200
 
-@web.route('/api/v2/questions/<int:id>/answers', methods=['POST'])
+@app.route('/api/v2/questions/<int:id>/answers', methods=['POST'])
 @jwt_required
 def answer_question(id):
     # retrive a question by it's ID
@@ -125,40 +125,9 @@ def answer_question(id):
     answers.save()
     return jsonify({'Answers': answers.__dict__}), 201
 
-# @web.route('/api/v2/answers', methods=['GET'])
-# @jwt_required
-# def view_all_answers():
-#     email = get_jwt_identity()
-#     user = get_answers(email)
-
-#     answers = get_answers(user['id'])
-#     if answers is None:
-#         return jsonify({'message': 'Answers not found!'})
-
-#     return jsonify({'Answers': answers})
-
-# @web.route('/api/v2/answers/<int:id>', methods=['PUT'])
-# @jwt_required
-# def prefered_answer(id):
-#     # retrieve a answer by it'd ID
-#     email = get_jwt_identity()
-#     user = get_user(email)
-
-#     # Mark a specific answer
-#     mark = get_answer(user['id'])
-
-#     if mark is None:
-#         return jsonify({'message': 'Answer not available'})
-
-#     mark['status'] = request.json.get('status'),
-#     mark['date_posted'] = datetime.now()
-
-#     edit_question(id, mark)
-
-#     return jsonify({'Answers': mark}), 200
 
 
-@web.route('/api/v2/auth/signout', methods=['POST'])
+@app.route('/api/v2/auth/signout', methods=['POST'])
 @jwt_required
 def signout():
     # Log out a sign in user

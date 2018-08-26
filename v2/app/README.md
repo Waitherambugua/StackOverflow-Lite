@@ -1,3 +1,12 @@
+<a href="https://codeclimate.com/github/codeclimate/codeclimate/maintainability"><img src="https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability" /></a>
+
+<a href="https://codeclimate.com/github/codeclimate/codeclimate/test_coverage"><img src="https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage" /></a>
+
+[![Build Status](https://travis-ci.org/Waitherambugua/StackOverflow-Lite.svg?branch=database_tests)](https://travis-ci.org/Waitherambugua/StackOverflow-Lite)
+
+
+
+
 # StackOverflow-lite      
 StackOverflow-lite is a platform where people can ask questions and provide answers.
 
@@ -16,19 +25,19 @@ StackOverflow-lite is a platform where people can ask questions and provide answ
 - Python 3.6 or a later version
 
 # Installation
-Downlaod / clone the project to your local computer by:
+Download / clone the project to your local computer by:
 - Download the zip file of this repository.
 - Unzip it and navigate into the UI directory.
 <pre><code>
-$ /StackOverflow-lite
+$ /
 </code></pre>
   
 
 # Alternatively
 Run the following command:
-<pre><code> $ git clone https://github.com/waitherambugua/StackOverflow-lite.git </code></pre>
-Locate StackOverflow-lite folder in your local computer.
-<pre><code>$ cd StackOverflow-lite/ </code></pre>
+<pre><code> $ git clone https://github.com/waitherambugua/StackOverflow-Lite.git </code></pre>
+Locate StackOverflow-Lite folder in your local computer.
+<pre><code>$ cd StackOverflow-Lite/ </code></pre>
 
 # Virtual environment
 Create a virtual environment
@@ -119,7 +128,8 @@ $ nosetests --with-coverage
 </pre>
 
 #
-- Hosted the API on [Heroku](https://stackoverflow-lite-v2.herokuapp.com)
+Hosted the API on [Heroku](https://stackoverflowlite-v2.herokuapp.com/)
+Hosted the UI on [gh-pages](https://waitherambugua.github.io)
 
 # Authors
 - Linda Mbugua - [waitherambugua](https://github.com/waitherambugua)

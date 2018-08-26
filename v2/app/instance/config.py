@@ -1,5 +1,8 @@
 import os
 
+
+
+
 class Config(object):
     """Parent configuration class."""
     DEBUG = False
@@ -31,9 +34,10 @@ class ProductionConfig(Config):
     TESTING = False
     JWT_SECRET_KEY = "gvhbjnkmsjbknmlnjk"
 
-app_config = {
-    'development' : DevelopmentConfig,
-    'testing' : TestingConfig,
-    'staging' : StagingConfig,
-    'production' : ProductionConfig
-}
+app_config = dict(
+    development=DevelopmentConfig,
+    testing=TestingConfig,
+    staging=StagingConfig,
+    production=ProductionConfig,
+    default=ProductionConfig
+)

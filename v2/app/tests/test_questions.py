@@ -21,7 +21,7 @@ class StackOverflow_lite(unittest.TestCase):
         self.answers = {'Answer': 'flask restful is a python framework', 'Date posted': '14th August 2018', 'status': 'pending'}
 
 
-        self.user = {'name': 'Arnold Osoro', 'email': 'arnoldmaengwe@gmail.com', 'password': '12345'}
+        self.user = {'name': 'Linda Mbugua', 'email': 'waitheralmbugua@gmail.com', 'password': '1234'}
         self.header = {"Content-Type": "application/json"}
         
         # create an authenticated user

@@ -72,30 +72,6 @@ def answer_question(answers):
     conn.commit()
     return cur.fetchone().get('id')
 
-# def get_answer(id):
-#     cur.execute("SELECT * FROM ANSWERS WHERE id = %s", (id,))
-#     answers = cur.fetchone()
-#     if answers is None:
-#         return None
-#     conn.commit()
-#     return answers
-
-# def get_answers(user_id):
-#     cur.execute("SELECT * FROM ANSWERS WHERE user_id =%s",(user_id,))
-#     answers = cur.fetchall()
-#     rows = []
-#     for row in answers:
-#         rows.append(dict(row))
-#     if rows is None:
-#         return None
-#     conn.commit()
-#     return rows
-
-# def mark_answer(id, answers):
-#     cur.execute("UPDATE ANSWERS SET status = %s WHERE id = %s", (
-#         answers['status'],
-#         answers['id']))
-#     conn.commit()
 
 
 def drop_everything(self):
