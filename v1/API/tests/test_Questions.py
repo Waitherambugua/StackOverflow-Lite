@@ -1,5 +1,4 @@
 from unittest import TestCase
-from app import create_app
 import Questions.views
 import os
 import json
@@ -39,7 +38,7 @@ class QuestionsTestCase(BaseTestCase):
         self.assertEqual(res.status_code, 201)
         res = self.client().get('/questions/')
         self.assertEqual(res.status_code, 200)
-        self.assertIn('Go to Borabora', str(res.data))
+        self.assertIn('', str(res.data))
 
     def test_api_can_get_questions_by_id(self):
         """Test API can get a single question by using it's id."""
@@ -68,8 +67,7 @@ class QuestionsTestCase(BaseTestCase):
 
     def test_question_deletion(self):
         """Test API can delete an existing question. (DELETE request)."""
-        rv = self.client().post(
-            '/Questions/',
+        rv = self.client().post('/Questions/',
             data={'01': 'How do you create a list in python?'})
         self.assertEqual(rv.status_code, 201)
         res = self.client().delete('/questions/1')

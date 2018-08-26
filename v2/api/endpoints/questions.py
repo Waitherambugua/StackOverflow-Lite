@@ -1,4 +1,4 @@
-from api.database.models import ( view_questions )
+from .database.models import Models
 from flask import jsonify
 
 
@@ -12,7 +12,7 @@ class Questions(MethodView):
         Fetch all questions
         """
         question = Questions.query.filter_by(id=id).first()
-        response = {'questions': view_questions()}
+        response = {'questions': Models.view_questions()}
         return response, 200
 
     def post(self):
@@ -36,7 +36,7 @@ class Questions(MethodView):
         response = jsonify(new_question)
         response.status_code = 201
 
-    return response
+        return response
 
 
 

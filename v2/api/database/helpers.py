@@ -36,7 +36,7 @@ def get_query(query, inputs):
     """Get results with inputs"""
     try:
         db_instance = DbConn()
-        db_instance.cur.execute(query, (inputs,))
+        db_instance.cur.execute(query, (inputs))
         result = db_instance.cur.fetchall()
         db_instance.close()
         return result
