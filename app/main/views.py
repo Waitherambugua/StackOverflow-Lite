@@ -10,7 +10,7 @@ from app.config import CONFIGS
 
 
 
-#app = create_app(CONFIGS)
+
 @main.route('/api/v2/auth/signup', methods=['POST'])
 def signup_user():
     user = get_user(request.json.get('email'))
@@ -126,17 +126,6 @@ def answer_question(id):
     answers.save()
     return jsonify({'Answers': answers.__dict__}), 201
 
-@main.route('/api/v2/questions/<int:id>/answers', methods=['GET'])
-@jwt_required
-def view_all_answers():
-    email = get_jwt_identity()
-    user = get_user(email)
-   #view all questions
-    questions = get_questions(user['id'])
-    if questions is None:
-    # retrieve all questions
-        return jsonify({'message': 'No questions found'})
-    return jsonify({'Answers': answers}), 200
 
 
 

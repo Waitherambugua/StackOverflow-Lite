@@ -81,7 +81,7 @@ def answer_question(answers):
 
 
 
-def drop_everything(self):
+def drop_tables(self):
     self.cur.execute("DROP TABLE tbl_users;")
     self.cur.execute("DROP TABLE tbl_questions;")
     self.cur.execute("DROP TABLE tbl_answers;")

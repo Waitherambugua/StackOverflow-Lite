@@ -80,7 +80,7 @@ class TestStackverflowlite(unittest.TestCase):
 
 
     def tearDown(self):
-        #reset_migration()
+        drop_tables()
 
 if __name__ == "__main__":
     unittest.main()
