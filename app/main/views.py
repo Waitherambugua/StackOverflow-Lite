@@ -1,16 +1,12 @@
 
-#from webargs import fields
-#from flask_apispec import use_kwargs, marshal_with
-#from flask_api import FlaskAPI
 from flask import request, jsonify, abort, make_response, json
 from flask_jwt_extended import (jwt_required, create_access_token, get_jwt_identity, get_raw_jwt)
 from passlib.handlers.bcrypt import bcrypt
 from datetime import datetime
-from helpers import insert_user, get_user, post_question, get_questions, get_question, edit_question, delete_question
-from models import User, Questions, Answers
+from app.helpers import insert_user, get_user, login_user, post_question, get_questions, get_question, edit_question, delete_question
+from app.models.models import User, Questions, Answers
 from . import main_blueprint as main
-#from .app import create_app 
-from config import CONFIGS
+from app.config import CONFIGS
 
 
 
@@ -24,13 +20,13 @@ def signup_user():
     user = User(name = request.json.get("name"),
                 email = request.json.get("email"),
                 password = bcrypt.encrypt(request.json.get("password")))
-    user.save()
+    user.insertUser()
 
     return jsonify({'message': 'User registered', 'User': user.__dict__})
     if user == " ./?><{!@#$%^&*(":
         return jsonify({'message': 'Insert Your Credentials to Register'})
-"""
-@app.route('/api/v2/auth/login', methods=['POST'])
+
+@main.route('/api/v2/auth/login', methods=['POST'])
 def login():
     email = request.json.get("email")
     password = request.json.get("password")
@@ -46,7 +42,7 @@ def login():
     return make_response('This account does not exist'), 401
 
 
-@app.route('/api/v2/questions', methods=['POST'])
+@main.route('/api/v2/questions', methods=['POST'])
 @jwt_required
 def question():
 
@@ -57,22 +53,22 @@ def question():
         question = request.json.get("question"),
         date_posted = datetime.now(),
         user_id = (user["id"]))
-    question.save()
+    question.post_question()
     return jsonify({'Questions': question.__dict__}), 201
 
-@app.route('/api/v2/questions', methods=['GET'])
+@main.route('/api/v2/questions', methods=['GET'])
 @jwt_required
 def view_all_questions():
     email = get_jwt_identity()
     user = get_user(email)
-
+   #view all questions
     questions = get_questions(user['id'])
     if questions is None:
     # retrieve all questions
         return jsonify({'message': 'No questions found'})
     return jsonify({'Questions': questions}), 200
 
-@app.route('/api/v2/questions/<int:id>', methods=['GET'])
+@main.route('/api/v2/questions/<int:id>', methods=['GET'])
 @jwt_required
 def single_question(id):
     email = get_jwt_identity()
@@ -85,7 +81,7 @@ def single_question(id):
 
     return jsonify({'Questions': question}), 200
 
-@app.route('/api/v2/questions/<int:id>', methods=['PUT'])
+@main.route('/api/v2/questions/<int:id>', methods=['PUT'])
 @jwt_required
 def modify_question(id):
     email = get_jwt_identity()
@@ -103,7 +99,7 @@ def modify_question(id):
 
     return jsonify({'Questions': edit}), 200
 
-@app.route('/api/v2/questions/<int:id>', methods=['DELETE'])
+@main.route('/api/v2/questions/<int:id>', methods=['DELETE'])
 @jwt_required
 def remove_question(id):
     email = get_jwt_identity()
@@ -116,7 +112,7 @@ def remove_question(id):
     delete_question(id)
     return jsonify({'message': 'Question has been deleted!'}), 200
 
-@app.route('/api/v2/questions/<int:id>/answers', methods=['POST'])
+@main.route('/api/v2/questions/<int:id>/answers', methods=['POST'])
 @jwt_required
 def answer_question(id):
     # retrive a question by it's ID
@@ -130,11 +126,22 @@ def answer_question(id):
     answers.save()
     return jsonify({'Answers': answers.__dict__}), 201
 
+@main.route('/api/v2/questions/<int:id>/answers', methods=['GET'])
+@jwt_required
+def view_all_answers():
+    email = get_jwt_identity()
+    user = get_user(email)
+   #view all questions
+    questions = get_questions(user['id'])
+    if questions is None:
+    # retrieve all questions
+        return jsonify({'message': 'No questions found'})
+    return jsonify({'Answers': answers}), 200
 
 
-@app.route('/api/v2/auth/logout', methods=['POST'])
+
+@main.route('/api/v2/auth/logout', methods=['POST'])
 @jwt_required
 def logout():
     # Log out a sign in user
     return jsonify({'message': 'Logged out successfully!'})
-"""

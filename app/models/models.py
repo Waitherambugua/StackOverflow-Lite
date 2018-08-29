@@ -1,11 +1,10 @@
-import helpers
+from app import helpers
 
 class User(object):
     """This class represents the users for the StackOverflow-lite."""
 
-    def __init__(self, id=0, username="", email="", password=""):
-        self.id = id
-        self.username = username
+    def __init__(self, name, email, password):
+        self.name = name
         self.email = email
         self.password = password
 
@@ -19,6 +18,7 @@ class User(object):
 
 class Questions(object):
     """This class represents the questions posted on the StackOverflow-lite API."""
+  
 
     def __init__(self, id=0, question="", date_posted="", user_id=""):
         self.id = id
@@ -26,7 +26,7 @@ class Questions(object):
         self.date_posted = date_posted
         self.user_id = user_id
 
-    def postQuestion(self):
+    def post_question(self):
         self.id = helpers.post_question(self)
 
 

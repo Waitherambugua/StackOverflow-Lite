@@ -15,9 +15,8 @@ def create_app(config_name):
     from app.main import main_blueprint
     app.register_blueprint(main_blueprint)
 
-    #db = Database()
-    #db.init_app(app)
-    #from views import *
+    db = Database()
+    db.init_app(app)
     jwt = JWTManager(app)
 
     return app     

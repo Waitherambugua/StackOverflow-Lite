@@ -3,9 +3,12 @@ from flask import Flask
 
 from app import create_app
 
-app = Flask(__name__, instance_relative_config=True)
+
 config_name = os.getenv('FLASK_CONFIG') 
-app = create_app(config_name)
+try:
+    app = create_app(config_name)
+except KeyError:
+    app = create_app('development')
 
 from app.manage import migrate
 migrate()
