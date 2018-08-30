@@ -20,7 +20,7 @@ class Questions(object):
     """This class represents the questions posted on the StackOverflow-lite API."""
   
 
-    def __init__(self, id=0, question="", date_posted="", user_id=""):
+    def __init__(self, id, question, date_posted, user_id):
         self.id = id
         self.question = question
         self.date_posted = date_posted
