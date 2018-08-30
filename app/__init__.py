@@ -2,7 +2,7 @@ import re
 from flask_api import FlaskAPI
 from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
-from db import Database
+from app.db import Database
 
 
 from config import CONFIGS
