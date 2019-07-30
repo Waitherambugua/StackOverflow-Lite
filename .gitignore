@@ -1,3 +1,4 @@
+
 # Build and Release Folders
 bin-debug/
 bin-release/
@@ -7,12 +8,22 @@ bin-release/
 # Other files and folders
 .settings/
 
+ Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+.env
+pip-selfcheck.json
+
 # Executables
 *.swf
 *.air
 *.ipa
 *.apk
-
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
